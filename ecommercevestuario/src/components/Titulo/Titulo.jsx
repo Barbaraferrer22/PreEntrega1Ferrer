@@ -1,10 +1,10 @@
 import "./Titulo.css";
 
-function Titulo(props) {
+function Titulo({ titleObject }) {
   return (
     <div className="titulos">
-      <h1>{props.titulo}</h1>
-      <h2>{props.subtitulo}</h2>
+      <h1>{titleObject.titulo}</h1>
+      <h2>{titleObject.subtitulo}</h2>
     </div>
   );
 }

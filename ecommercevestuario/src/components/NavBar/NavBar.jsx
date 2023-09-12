@@ -6,12 +6,13 @@ import {
   NavDropdown,
   Navbar,
 } from "react-bootstrap";
+import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () => {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
-        <Navbar.Brand href="#">Valentina Carrillo</Navbar.Brand>
+        <Link to="/">Valentina Carrillo</Link>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -24,18 +25,12 @@ const NavBar = () => {
               title="Bikinis y Traje de baños"
               id="navbarScrollingDropdown"
             >
-              <NavDropdown.Item href="#action3">
-                Colección Mareas
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                Colección Florecer
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action5">
-                Colección Malibú
-              </NavDropdown.Item>
+              <NavLink to="/categoria/mareas">Colección Mareas</NavLink>
+              <NavLink to="/categoria/florecer">Colección Florecer</NavLink>
+              <NavLink to="/categoria/malib">Colección Malibú</NavLink>
             </NavDropdown>
           </Nav>
-          <Form className="d-flex">
+          {/* <Form className="d-flex">
             <Form.Control
               type="search"
               placeholder="Trikini Salty"
@@ -43,8 +38,11 @@ const NavBar = () => {
               aria-label="Search"
             />
             <Button variant="outline-success">Buscador</Button>
-          </Form>
-          🛒
+          </Form> */}
+
+          <nav>
+            <Link to="/cart">🛒</Link>
+          </nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
