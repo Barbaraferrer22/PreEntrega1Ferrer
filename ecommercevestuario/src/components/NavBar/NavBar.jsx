@@ -7,12 +7,23 @@ import {
   Navbar,
 } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
+import CartWidget from "./CartWidget/CartWidget";
+import { useCartContext } from "../Context/CartContext";
 
-const NavBar = () => {
+const NavBar = ({ children }) => {
+  const { cantidadTotal } = useCartContext();
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
-        <Link to="/">Valentina Carrillo</Link>
+        <Link
+          className={({ isActive }) =>
+            isActive ? "btn btn-info" : "btn btn-outline-info"
+          }
+          to="/"
+        >
+          Valentina Carrillo
+        </Link>
+
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -20,28 +31,37 @@ const NavBar = () => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="#action2">Vesturio</Nav.Link>
-            <NavDropdown
-              title="Bikinis y Traje de baños"
-              id="navbarScrollingDropdown"
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "btn btn-info" : "btn btn-outline-info"
+              }
+              to="/categoria/mareas"
             >
-              <NavLink to="/categoria/mareas">Colección Mareas</NavLink>
-              <NavLink to="/categoria/florecer">Colección Florecer</NavLink>
-              <NavLink to="/categoria/malib">Colección Malibú</NavLink>
-            </NavDropdown>
+              Colección Mareas
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "btn btn-info" : "btn btn-outline-info"
+              }
+              to="/categoria/florecer"
+            >
+              Colección Florecer
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "btn btn-info" : "btn btn-outline-info"
+              }
+              to="/categoria/malibu"
+            >
+              Colección Malibú
+            </NavLink>
           </Nav>
-          {/* <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Trikini Salty"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Buscador</Button>
-          </Form> */}
 
           <nav>
-            <Link to="/cart">🛒</Link>
+            <Link to="/cart">
+              {cantidadTotal()}
+              <CartWidget />
+            </Link>
           </nav>
         </Navbar.Collapse>
       </Container>

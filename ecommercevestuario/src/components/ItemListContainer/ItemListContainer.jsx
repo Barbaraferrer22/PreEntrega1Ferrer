@@ -1,25 +1,49 @@
 import React, { useEffect, useState } from "react";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
 import { mFetch } from "../../utils/mockFetch";
 import { ItemList } from "../ItemList/ItemList";
 import { useParams } from "react-router-dom";
+
+const Loading = () => {
+  return (
+    <>
+      <h2>Cargando...👙</h2>
+    </>
+  );
+};
 
 const ItemListContainer = () => {
   const [products, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const { cid } = useParams();
-  console.log(cid);
 
   useEffect(() => {
     if (cid) {
-      mFetch()
-        .then((respuesta) =>
-          setProduct(respuesta.filter((product) => cid === product.categoria))
+      mFetch();
+      const db = getFirestore();
+      const queryCollection = collection(db, "productos");
+      const queryFilter = query(queryCollection, where("categoria", "==", cid));
+      getDocs(queryFilter)
+        .then((resp) =>
+          setProduct(resp.docs.map((prod) => ({ id: prod.id, ...prod.data() })))
         )
         .catch((err) => console.log(err))
         .finally(() => setLoading(false));
     } else {
-      mFetch()
-        .then((respuesta) => setProduct(respuesta))
+      const db = getFirestore();
+      const queryCollection = collection(db, "productos");
+      getDocs(queryCollection)
+        .then((resp) =>
+          setProduct(resp.docs.map((prod) => ({ id: prod.id, ...prod.data() })))
+        )
         .catch((err) => console.log(err))
         .finally(() => setLoading(false));
     }
@@ -27,7 +51,7 @@ const ItemListContainer = () => {
 
   return (
     <main className="row g-4 my-5">
-      {loading ? <h2>Cargando...👙</h2> : <ItemList products={products} />}
+      {loading ? <Loading /> : <ItemList products={products} />}
     </main>
   );
 };

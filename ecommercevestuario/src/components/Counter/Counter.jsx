@@ -6,6 +6,7 @@ const Counter = ({ inicial, stock, onAdd }) => {
   /*  const handleOnAdd = () => {
     onAdd(count)
 } */
+
   return (
     <div className="contador">
       <button onClick={handleAdd}> + 1</button>

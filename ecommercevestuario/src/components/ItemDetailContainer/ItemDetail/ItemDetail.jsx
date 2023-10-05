@@ -1,10 +1,27 @@
+import { useState } from "react";
+import { useCartContext } from "../../Context/CartContext";
 import Counter from "../../Counter/Counter";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const ItemDetail = ({ product }) => {
-  console.log(product);
+  const [isCounter, setIsCounter] = useState(true);
+  const { addProduct } = useCartContext();
 
   const onAdd = (count) => {
-    alert("Se ha agregado al carrito " + count + " Producto");
+    toast("Su Producto se agrego al Carrito", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+    addProduct({ ...product, quantity: count });
+    setIsCounter(false);
   };
 
   return (
@@ -19,7 +36,25 @@ export const ItemDetail = ({ product }) => {
         </div>
         <div className="col">
           {" "}
-          <Counter inicial={1} stock={10} onAdd={onAdd} />
+          {isCounter ? (
+            <Counter inicial={1} stock={100} onAdd={onAdd} />
+          ) : (
+            <>
+              <Link to={"/cart"}>
+                <button className="btn btn-outline-dark ">
+                  {" "}
+                  Ir al Carrito{" "}
+                </button>
+              </Link>
+
+              <Link to={"/"}>
+                <button className="btn btn-outline-dark ">
+                  {" "}
+                  Ir al Inicio{" "}
+                </button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>

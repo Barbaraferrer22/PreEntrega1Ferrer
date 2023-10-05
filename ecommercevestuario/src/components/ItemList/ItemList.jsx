@@ -2,7 +2,7 @@ import { products } from "../../utils/mockFetch";
 import Filter from "../Filter/Filter";
 import { Item } from "../Item/Item";
 
-const handleProductFilter = ({ filterState, handleFilterChange }) => (
+const handleProductFilter = ({ products, filterState, handleFilterChange }) => (
   <>
     <h2>Buscador</h2>
     <input type="text" value={filterState} onChange={handleFilterChange} />
@@ -25,7 +25,6 @@ export const ItemList = ({ products }) => {
         )) */}
         {handleProductFilter}
       </Filter>
-      ;
     </>
   );
 };

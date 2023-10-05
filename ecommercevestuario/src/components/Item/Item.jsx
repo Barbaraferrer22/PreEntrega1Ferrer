@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 
-export const Item = ({ product }) => {
+export const Item = memo(({ product }) => {
   return (
     <div key={product.id} className="card w-25">
       <div className="card-body"></div>
@@ -14,6 +14,6 @@ export const Item = ({ product }) => {
       </Link>
     </div>
   );
-};
+});
 
 export default Item;
