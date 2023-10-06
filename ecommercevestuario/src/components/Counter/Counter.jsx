@@ -3,9 +3,6 @@ import { useCounter } from "../hooks/useCounter";
 
 const Counter = ({ inicial, stock, onAdd }) => {
   const { count, handleAdd, handleSubtract } = useCounter(inicial, stock);
-  /*  const handleOnAdd = () => {
-    onAdd(count)
-} */
 
   return (
     <div className="contador">

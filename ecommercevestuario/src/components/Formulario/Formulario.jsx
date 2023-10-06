@@ -19,7 +19,6 @@ const Formulario = () => {
 
   return (
     <div>
-      {/* <Form formData={formData} handleOnchange={handleOnchange} /> */}
       <FormWhitVadidation formData={formData} handleOnchange={handleOnchange} />
     </div>
   );

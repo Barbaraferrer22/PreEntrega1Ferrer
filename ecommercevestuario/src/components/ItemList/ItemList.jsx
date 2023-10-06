@@ -19,12 +19,7 @@ const handleProductFilter = ({ products, filterState, handleFilterChange }) => (
 export const ItemList = ({ products }) => {
   return (
     <>
-      <Filter products={products}>
-        {/* products.map((product) => (
-          <Item key={product.id} product={product} />
-        )) */}
-        {handleProductFilter}
-      </Filter>
+      <Filter products={products}>{handleProductFilter}</Filter>
     </>
   );
 };
